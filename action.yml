@@ -27,8 +27,6 @@ runs:
         New-Variable packages -Value '${{ inputs.packages}}' -Option Constant
 
         if ($windows_host) {
-            echo 'CYGWIN=winsymlinks:nativestrict' >> $env:GITHUB_ENV
-
             $choco_params = @(
                 'install',
                 '-y',
