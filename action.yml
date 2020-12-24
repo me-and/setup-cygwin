@@ -44,7 +44,7 @@ runs:
             $choco_params += 'cygwin'
 
             # Assuming that Cygwin is not installed when this is run.
-            choco.exe $choco_params
+            choco.exe $choco_params | Out-Default
 
             echo (Join-Path $install_dir usr local bin) >> $env:GITHUB_PATH
             # /usr/bin is really just /bin on Cygwin.
@@ -53,7 +53,7 @@ runs:
             $pkg_list = $packages.Split(' ', [System.StringSplitOptions]::RemoveEmptyEntries)
 
             if ($pkg_list.Count -gt 0) {
-                choco.exe install -y --no-progress --source=cygwin $pkg_list
+                choco.exe install -y --no-progress --source=cygwin $pkg_list | Out-Default
             }
         } else {
             throw "Sorry, installing Cygwin is unsupported on $os"
